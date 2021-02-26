@@ -84,6 +84,18 @@ exports.read = (req, res) => {
   });
 };
 
+exports.findById = (req, res) => {
+  Product.getOne(req.params.id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving Order.",
+      });
+    else {
+      res.send(data);
+    }
+  });
+};
+
 exports.productImages = (req, res) => {
   if (req.files) {
     let file = req.files.image;

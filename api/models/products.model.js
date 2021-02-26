@@ -73,6 +73,19 @@ module.exports = {
     });
   },
 
+  getOne: (id, result) => {
+    sql.query("SELECT * FROM products WHERE id =?", id, (err, res) => {
+      if (err) {
+        result(err, null);
+        throw err;
+        return;
+      } else {
+        result(null, res[0]);
+        console.log("Products", res[0]);
+      }
+    })
+  },
+
   delete: (id, result) => {
     sql.query("DELETE FROM products WHERE id = ?", id, (err, res) => {
       if (err) {
